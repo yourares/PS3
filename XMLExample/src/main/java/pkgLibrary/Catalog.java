@@ -62,7 +62,7 @@ public class Catalog {
 
 	}
 
-	public Book AddBook(Catalog id) throws BookException{
+	public Book AddBook(Catalog cat, String id) throws BookException{
 		try {
 
 			String basePath = new File("").getAbsolutePath();
@@ -78,15 +78,16 @@ public class Catalog {
 			jaxbMarshaller.marshal(cat, file);
 			jaxbMarshaller.marshal(cat, System.out);
 
-		} catch (JAXBException e) {
+		} catch (JAXBException e){
 			e.printStackTrace();
 		}
 		for (int i = 0; i < cat.getBooks().size(); i++) {
-			if (cat.getBooks().get(i).getId() != id) {
-				return ;
+			if (cat.getBooks().get(i).getId() == id) {
+				throw new BookException(id);
 			}
 		}
-		throw new BookException();
+		return null;
+		
 	}
 
 }
