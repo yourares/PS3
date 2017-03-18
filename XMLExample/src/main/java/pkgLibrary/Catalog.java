@@ -65,6 +65,7 @@ public class Catalog {
 	public Book AddBook(Catalog cat, Book b, String id) throws BookException{
 		for (int i = 0; i < cat.getBooks().size(); i++) {
 			if (cat.getBooks().get(i).getId() == id) {
+				System.out.println("The book is already exits:" + id);
 				throw new BookException(id);
 			}
 		}
